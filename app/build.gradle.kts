@@ -48,6 +48,8 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
     //viewmodel lifecycle
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+    //Koin
+    implementation("io.insert-koin:koin-android:3.5.0")
 
 
     testImplementation("junit:junit:4.13.2")

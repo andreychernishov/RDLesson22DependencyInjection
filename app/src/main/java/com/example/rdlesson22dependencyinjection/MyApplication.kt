@@ -1,25 +1,17 @@
 package com.example.rdlesson22dependencyinjection
 
 import android.app.Application
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import com.example.rdlesson22dependencyinjection.koin.myModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 
 class MyApplication: Application() {
-
-    lateinit var repo: Repository
     override fun onCreate() {
         super.onCreate()
-        instance = this
-        repo = Repository(getAppClient())
+        startKoin {
+            androidContext(this@MyApplication)
+            modules(myModule)
+        }
     }
-    private fun getAppClient(): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl("https://api.coincap.io/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-    }
-    companion object{
-        private lateinit var instance: MyApplication
-        fun getApp() = instance
-    }
+
 }
