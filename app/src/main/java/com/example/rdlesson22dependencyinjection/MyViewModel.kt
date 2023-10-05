@@ -7,14 +7,19 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.koin.java.KoinJavaComponent.inject
-import retrofit2.Response
+import javax.inject.Inject
 
 class MyViewModel: ViewModel() {
     private val _uiState = MutableLiveData<UIState>(UIState.Empty)
     val uiState: LiveData<UIState> = _uiState
+    @Inject
+    lateinit var repo: Repository
 
-    private val repo: Repository by inject(clazz = Repository::class.java)
+    init {
+        MyApplication.component.inject(this)
+
+    }
+
     fun getData() {
         _uiState.value = UIState.Processing
         viewModelScope.launch {

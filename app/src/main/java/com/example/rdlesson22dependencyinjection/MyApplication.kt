@@ -1,17 +1,18 @@
 package com.example.rdlesson22dependencyinjection
 
 import android.app.Application
-import com.example.rdlesson22dependencyinjection.koin.myModule
-import org.koin.android.ext.koin.androidContext
-import org.koin.core.context.startKoin
+import com.example.rdlesson22dependencyinjection.dagger.DaggerMyComponent
+import com.example.rdlesson22dependencyinjection.dagger.MyComponent
+
 
 class MyApplication: Application() {
     override fun onCreate() {
         super.onCreate()
-        startKoin {
-            androidContext(this@MyApplication)
-            modules(myModule)
-        }
+        component = DaggerMyComponent.create()
+    }
+
+    companion object{
+        lateinit var component: MyComponent
     }
 
 }
