@@ -24,6 +24,8 @@ class MyViewModel: ViewModel() {
                     if (bitcoin.isSuccessful){
                         val data = bitcoin.body()?.data
                         _uiState.postValue(UIState.Result("${data?.id} ${data?.rateUsd}"))
+                    }else{
+                        _uiState.postValue(UIState.Error("Error code ${bitcoin.code()}"))
                     }
                 }catch (e: Exception){
                     _uiState.postValue(UIState.Error(e.localizedMessage))
