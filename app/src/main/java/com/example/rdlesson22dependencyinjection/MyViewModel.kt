@@ -4,21 +4,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class MyViewModel: ViewModel() {
+@HiltViewModel
+class MyViewModel @Inject constructor(val repo: Repository): ViewModel() {
     private val _uiState = MutableLiveData<UIState>(UIState.Empty)
     val uiState: LiveData<UIState> = _uiState
-    @Inject
-    lateinit var repo: Repository
-
-    init {
-        MyApplication.component.inject(this)
-
-    }
 
     fun getData() {
         _uiState.value = UIState.Processing

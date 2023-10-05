@@ -1,18 +1,9 @@
 package com.example.rdlesson22dependencyinjection
 
 import android.app.Application
-import com.example.rdlesson22dependencyinjection.dagger.DaggerMyComponent
-import com.example.rdlesson22dependencyinjection.dagger.MyComponent
+import dagger.hilt.android.HiltAndroidApp
 
-
+@HiltAndroidApp
 class MyApplication: Application() {
-    override fun onCreate() {
-        super.onCreate()
-        component = DaggerMyComponent.create()
-    }
-
-    companion object{
-        lateinit var component: MyComponent
-    }
 
 }

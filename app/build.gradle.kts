@@ -2,7 +2,11 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     //for dagger
-    id("com.google.devtools.ksp")
+//    id("com.google.devtools.ksp")
+
+    //for Hilt
+    id("org.jetbrains.kotlin.kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -54,10 +58,18 @@ dependencies {
     //implementation("io.insert-koin:koin-android:3.5.0")
 
     //Dagger
-    implementation("com.google.dagger:dagger:2.48")
-    ksp("com.google.dagger:dagger-compiler:2.48")
+//    implementation("com.google.dagger:dagger:2.48")
+//    ksp("com.google.dagger:dagger-compiler:2.48")
+
+    //Hilt
+    implementation("com.google.dagger:hilt-android:2.46.1")
+    kapt("com.google.dagger:hilt-compiler:2.46.1")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+}
+
+kapt{
+    correctErrorTypes = true
 }
